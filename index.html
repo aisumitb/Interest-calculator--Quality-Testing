@@ -144,18 +144,40 @@
     }); if(payments.length===0){ const tr=document.createElement('tr'); const td=document.createElement('td'); td.colSpan=3; td.className='muted'; td.textContent='No payments entered'; tr.appendChild(td); paymentsBody.appendChild(tr);} }
 
     $('addPayment').onclick = () => {
-      const date = prompt('Payment date (YYYY-MM-DD)');
-      if (!date) return;
-      const iso = dateISO(date);
-      if (!iso) { alert('Invalid date'); return; }
-      const amtStr = prompt('Amount (₹)');
-      if (!amtStr) return;
-      const amt = toNum(amtStr);
-      if (amt <= 0) { alert('Enter positive amount'); return; }
-      payments.push({date: iso, amount: amt});
-      payments.sort((a,b)=> new Date(a.date)-new Date(b.date));
-      renderPayments();
-    };
+
+  const dateStr = prompt('Enter payment date (DD-MM-YYYY)');
+
+  if(!dateStr) return;
+
+  const parts = dateStr.split('-');
+
+  if(parts.length !== 3){
+    alert('Enter date in DD-MM-YYYY format');
+    return;
+  }
+
+  const day = parts[0];
+  const month = parts[1];
+  const year = parts[2];
+
+  const isoDate = `${year}-${month}-${day}`;
+
+  const amtStr = prompt('Amount (₹)');
+  if(!amtStr) return;
+
+  const amt = toNum(amtStr);
+
+  if(amt <= 0){
+    alert('Enter valid amount');
+    return;
+  }
+
+  payments.push({date: isoDate, amount: amt});
+
+  payments.sort((a,b)=> new Date(a.date) - new Date(b.date));
+
+  renderPayments();
+};
 
     $('clearPayments').addEventListener('click', ()=>{ if(confirm('Clear all payments?')){ payments.length=0; renderPayments(); } });
 
