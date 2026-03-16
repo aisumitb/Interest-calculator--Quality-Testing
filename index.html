@@ -207,6 +207,10 @@
 
   return sum;
 }
+  });
+
+  return sum;
+}
     // find date when cumulative payments become >= target; returns date string or null
     function dateWhenCumulativeAtLeast(target){ let cum=0; for(const p of payments){ cum += Number(p.amount); if (cum >= target) return p.date; } return null; }
 
