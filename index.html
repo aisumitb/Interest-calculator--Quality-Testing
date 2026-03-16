@@ -256,12 +256,15 @@
       const req4 = assessedTax * 1.00;
 
       // Determine due dates based on AY selected
-      const ayStartYearNum = parseInt(ay.split('-')[0],10);
-      const due1 = ayStartYearNum + '-06-15';
-      const due2 = ayStartYearNum + '-09-15';
-      const due3 = ayStartYearNum + '-12-15';
-      const due4 = (ayStartYearNum + 1) + '-03-15';
+     const ayStartYearNum = parseInt(ay.split('-')[0],10);
 
+// advance tax belongs to previous financial year
+const fyYear = ayStartYearNum - 1;
+
+const due1 = fyYear + '-06-15';
+const due2 = fyYear + '-09-15';
+const due3 = fyYear + '-12-15';
+const due4 = ayStartYearNum + '-03-15';
       // For each instalment compute cumulative paid till that due date
       const paid1 = paidTill(due1);
       const paid2 = paidTill(due2);
