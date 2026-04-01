@@ -1,408 +1,790 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IT Interest Calculator — Exact Excel Logic (Multi-payment)</title>
-  <style>
-    body{font-family:Inter, system-ui, Arial; background:#f4f6f8;color:#102027;margin:0;padding:20px}
-    .wrap{max-width:1100px;margin:20px auto}
-    .card{background:#fff;border-radius:10px;padding:16px;box-shadow:0 6px 20px rgba(16,32,40,0.06);margin-bottom:16px}
-    h1{margin:0 0 8px;font-size:20px}
-    label{display:block;font-size:13px;color:#556; margin-bottom:6px}
-    input[type="number"], input[type="date"], select{width:100%;padding:8px;border-radius:6px;border:1px solid #e6eef2}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:8px;border-bottom:1px solid #eef3f5;text-align:left;font-size:13px}
-    button{background:#0ea5a4;border:0;color:white;padding:8px 10px;border-radius:6px;cursor:pointer}
-    .muted{color:#6b7880;font-size:13px}
-    .out{background:#f8fafb;border-radius:8px;padding:12px;margin-top:12px}
-    .small{font-size:13px}
-    .actions{display:flex;gap:8px;flex-wrap:wrap}
-    .danger{background:#ef4444}
-    .secondary{background:#64748b}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>casumitkumarbagra.co.in</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #2f4a8a;
+            margin: 0;
+    padding: 0;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+        }
+
+       
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        
+
+        .card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #1e3a8a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #162d6b;
+        }
+        .header {
+            background-color: #2f4a8a;
+            color: #fff;
+            padding: 0 40px 20px 40px;   
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .header-left h1 {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            margin-left: auto; 
+            display: flex;
+            
+            flex-direction: column;   /* Stack logo + details vertically */
+            align-items: flex-end;    /* Align everything to right */
+            gap: 10px;
+        }
+
+        .ca-details {
+            text-align: right;
+        }
+
+        .ca-name {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .contact {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .ca-logo {
+            width: 200px;
+            height:200px;
+            object-fit: contain;
+            background:transparent;
+            border-radius: 8px;
+            padding: 0;
+        }
+        .appointment-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ffffff;
+            color: #2f4a8a;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+        .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    flex: 1;
+}
+        .main-layout {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0; 
+    gap: 30px; 
+            margin-bottom:0;
+    
+    align-items:flex-start; 
+    flex:1;
+}
+
+.services-ticker-vertical {
+    width: 260px;          /* fixed sidebar width */
+    min-height:100px;     /* full height look */
+    background: #2f4a8a;   /* match header */
+    color: #fff;
+    padding: 20px 15px;
+    border-radius: 0; 
+    position: relative;   /* ensures normal flow */
+    margin-left: 0;  
+    overflow: hidden;
+}
+.service-group {
+    padding: 10px 0;
+}
+
+.main-service {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sub-services {
+    list-style: none;
+    padding-left: 15px;
+    font-size: 13px;
+    opacity: 0.85;
+}
+
+.sub-services li {
+    padding: 3px 0;
+}
+
+.ticker-vertical-track {
+    display: flex;
+    flex-direction: column;
+    animation: vertical-scroll 20s linear infinite;
+}
+
+.ticker-vertical-track div {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    font-size: 14px;
+}
+
+.tools-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom:0;
+    
+}
+
+@keyframes vertical-scroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+        .appointment-btn:hover {
+            background-color: #e0e6f5;
+        }
+.video-section{
+margin-top:30px;
+}
+
+.video-row{
+display:flex;
+gap:20px;
+overflow-x:auto;
+padding:10px 0;
+}
+
+.video-row iframe{
+width:320px;
+height:180px;
+border:none;
+border-radius:8px;
+flex-shrink:0;
+}        
+.profile-section{
+    width:1000px;
+    padding: 20px 0;
+    margin-left:290px; 
+    margin-right:40px;
+}
+
+.profile-card{
+    background:linear-gradient(135deg,#ffffff,#eef3ff);
+    padding:20px;
+    margin-right:80px;
+    border-radius:10px;
+    
+    margin:0 0 20px 0; /* touch right edge */
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+        .profile-photo{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+}
+.profile-content{
+    flex:1;
+    text-align: justify;
+}
+
+.profile-card h2{
+    color:#1e3a8a;
+    margin-bottom:10px;
+}
+
+.profile-card p{
+    font-size:14px;
+    color:#555;
+    line-height:1.6;
+}        
+        
+        
+        
+        
+        .footer-note{
+margin-top:auto;
+background:#2f4a8a;
+padding:15px 20px;
+}
+
+.footer-container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:#777;
+font-size:12px;
+}
+
+
+.visitor-counter{
+    font-size:12px;
+    color:#777;
+}
+
+.visitor-counter{
+    text-align:right;
+    font-size:12px;
+    color:#777;
+    margin-top:4px;   /* small gap from footer */
+    margin-right:20px;
+}
+        
+        .news-ticker {
+    margin-top: 10px;
+    width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.news-track {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scrollNews 40s linear infinite;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+@keyframes scrollNews {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+.calendar-left{
+    height:220px;  
+    left: 0;
+    top: 420px;
+    overflow:auto;    
+    width: 250px;
+    background: #ffffff;
+    padding: 1px;
+    border-radius: 8px;
+}
+.calendar-left iframe{
+    width:750px;       /* larger than container */
+    height:550px;
+    pointer-events: none;
+}
+.promo-slider{
+    width:500px;
+    height:380px;
+    margin:0 auto;   
+    overflow:hidden;
+    position:relative;
+}
+
+.promo-slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 1s;
+}
+
+.promo-slide.active{
+    opacity:1;
+}
+.blog-slider{
+    margin-left:20px;
+    margin-right:40px;
+    margin-top:0; 
+    width:960px;
+    aspect-ratio:16/9;
+    overflow:hidden;   /* VERY IMPORTANT */
+    background:#ffffff;
+  
+}
+
+.blog-slider iframe{
+    width:120%;
+    height:120%;
+    transform: translate(-10%, -10%);
+    border:none;
+    pointer-events:none;
+}
+      .blog-login-row{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+}
+      .client-login{
+    flex:1;
+    background:#ffffff;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.client-login h3{
+    background:#1e3a8a;
+    color:#fff;
+    padding:10px;
+    margin:-15px -15px 10px -15px;
+    font-size:16px;
+}
+
+.client-login input{
+    width:100%;
+    padding:8px;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.client-login button{
+    width:100%;
+    padding:8px;
+    background:#1e3a8a;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.client-login button:hover{
+    background:#162d6b;
+}
+
+.login-links{
+    margin-top:8px;
+    text-align:right;
+}
+
+.login-links a{
+    font-size:12px;
+    color:#1e3a8a;
+    text-decoration:none;
+}
+        .contact-form{
+    background:#ffffff;
+            color:#000; 
+    padding:15px;
+    width:250px;
+    border-radius:6px;
+            margin-top:40px;
+}
+
+.contact-form h3{
+    background:#5bb043;   /* green header */
+    color:#fff;
+    padding:10px;
+    font-size:16px;
+    margin:-15px -15px 10px -15px;
+}
+
+.contact-form label{
+    display:block;
+    font-size:13px;
+    margin-bottom:4px;
+}
+
+.contact-form label span{
+    color:red;
+}
+
+/* TEXTAREA (MAIN CHANGE) */
+.contact-form textarea{
+    width:100%;
+    color:#000; 
+    height:200px;   /* 🔥 increase this to match image */
+    border:1px solid #999;
+    margin-bottom:10px;
+}
+
+/* INPUTS */
+.contact-form input{
+    width:100%;
+    height:30px;
+    color:#000; 
+    border:1px solid #999;
+    margin-bottom:10px;
+}
+
+/* BUTTON */
+.contact-form button{
+    background:#1e3a8a;
+    color:#fff;
+    border:none;
+    padding:8px 15px;
+    cursor:pointer;
+}   
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <h1>Income-tax Interest Calculator — Exact Excel Logic (Multi-payment)</h1>
-      
+  
+
+    <div class="header">
+        <div class="header-left">
+            <h1></h1>
+            <p></p>
+        </div>
+        <div class="news-ticker">
+    <div class="news-track" id="newsTrack">
+        Loading updates...
+    </div>
+</div>
+
+        <div class="header-right">
+          <img src="https://lh3.googleusercontent.com/d/1WswH77yc6eu7x4h4_xywzeODCuC-e6Ur"  class="ca-logo">
+            <div class="ca-details">
+                <div class="ca-name">CA SUMIT KR BAGRA</div>
+                <div class="contact">📞 +91-9707021603</div>
+                <div class="contact">✉ casumitbagra@gmail.com</div>
+                <div class="contact">📍 Guwahati, Assam</div>
+                <div style="margin-top:10px;">
+                    <a href="https://forms.gle/nU4eU5YwmsVjVd2w7" class="appointment-btn" target="_blank">Book Appointment</a>
+                </div>
+                </div>
+                </div>
+                </div>
+<div class="profile-section">
+    <div class="profile-card">
+        <img src="https://lh3.googleusercontent.com/d/1BtQbOThrD1rRRWyKlhdqFyryiIdQyZzO" class="profile-photo">
+        <div class="profile-content">
+        <h2>Proprietor</h2>
+        <p><strong>CA Sumit Kr Bagra</strong> is a Chartered Accountant based in Guwahati, Assam, offering a wide range of professional services including Audit & Assurance, Direct and Indirect Taxation, Corporate Compliance, and Financial Advisory. He has completed Chartered Accountancy Course in the Year 2012 and has over 10 years of experience working in the industry in various sectors including cement, healthcare etc. He has domain expertise in areas of  Financial reporting, Income tax and GST. With a client-focused approach and strong technical expertise, he provides practical solutions to businesses, startups, and individuals, ensuring compliance and strategic financial growth.        </div>
+    </div>
+</div>                
+                
+            
+   <div class="main-layout">
+
+    <!-- LEFT SIDE – Vertical Ticker -->
+    <div class="services-ticker-vertical">
+        <div class="ticker-vertical-track">
+            
+            <div class="service-group">
+            <div class="main-service">Audit & Assurance</div>
+            <ul class="sub-services">
+                <li>Statutory Audit</li>
+                <li>Tax Audit</li>
+                <li>Internal Audit</li>
+                <li>Certifications</li>
+                <li>Limited reviews</li>
+                <li>Stock audits</li>
+            </ul>
+            <div class="service-group">
+            <div class="main-service">Indirect Taxation Services</div>
+            <ul class="sub-services">
+                <li>GST Return Filing</li>
+                <li>GST Registrations</li>
+                <li>GST Advisory Services</li>
+            </ul>
+            <div class="service-group">
+            <div class="main-service">Direct Taxation Services</div>
+            <ul class="sub-services">
+                <li>Income Tax Return Filing</li>
+                <li>TDS Compliance</li>
+                <li>Advance Tax Computation</li>
+                <li>Income Tax Planning & Advisory </li>
+            </ul>
+            <div class="service-group">
+            <div class="main-service">Company and LLP Law & Secreterial Services</div>
+            <ul class="sub-services">
+                <li>Annual filling- AOC-4, MGT-7/7A, Annual Return</li>
+                <li>KMP management</li>
+                <li>Various types of Conversion from & to Corporate form</li>
+                <li>Board Report/Annual Report/Board Minutes</li>
+                <li>Company Strike off</li>
+                <li>Charge management</li>
+                <li>Maintenance of statutory registers and Minutes</li>
+                <li>Shifting of Registered Office</li>
+                <li>Company Incorporation</li>
+                <li>Producer Company Incorporation</li>
+                <li>LLP Incorporation</li>
+                <li>MOA & AOA Alteration</li>
+                <li>Alteration of Capital</li>
+                <li>Share Transfer</li>
+                <li>Share Certificate</li>
+                <li>Due Diligence Report</li>
+            </ul>
+            
+            <div class="service-group">
+            <div class="main-service">Other Services</div>
+            <ul class="sub-services">
+                <li>Maintenance of Accounts as per IGAAP and IND(AS)</li>
+                <li>Preparation of financial statement</li>
+                <li>Virtual CFO services</li>
+                <li>FEMA Advisory</li>
+                <li>IFC (Internal Financial Control) Advisory</li>
+                <li>SOP Designing</li>
+            </ul>
+           
+            
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+        </div>
+        <div class="calendar-left">
+        <iframe src="https://calendar.google.com/calendar/embed?src=87004f704dba7f3a049d8a9b19e686914fe5c6d9b54689fafc4a118e8a038348%40group.calendar.google.com&ctz=Asia%2FKolkata&showTitle=0&showPrint=0&showTabs=0&showTz=0&showCalendars=0" style="border: 0" width="750" height="550" frameborder="0" scrolling="yes"></iframe>
+    
+    </div>
+       <div class="contact-form">
+    <h3>Want to consult us?</h3>
+
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="email" id="email" placeholder="Email ID">
+    <input type="text" id="phone" placeholder="Phone">
+    <textarea id="message" placeholder="Message"></textarea>
+
+    <button onclick="submitForm()">Submit</button>
+</div>
+        </div>
+    
+
+        
+    
+
+<div class="tools-wrapper">
+    <div class="container">
+
+        <div class="card">
+            <h3>15CA / 15CB Advisory</h3>
+            <p>Determine Form 15CA / 15CB requirement with advisory output.</p>
+            <a href="#" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>Form Centre</h3>
+            <p>Forms for various statutory compliance work.</p>
+            <a href="https://aisumitb.github.io/Form-Hub/" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>GST Transaction Advisory - E-Way Bill</h3>
+            <p>Quick E-Way bill requirement check.</p>
+            <a href="https://aisumitb.github.io/GST-Advisory-Tool--E-Way-Bill/" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>GST Transaction Advisory - Invoicing Helper</h3>
+            <p>Transaction advisory tool for GST invoicing.</p>
+            <a href="https://aisumitb.github.io/GST-Advisory-Tool/" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>Download Center</h3>
+            <p>Downloadable checklists for audits, filings, and certifications.</p>
+            <a href="https://aisumitb.github.io/Download-Center/" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>Capital Gains Tax Calculator</h3>
+            <p>Capital Gains Tax Calculator tool.</p>
+            <a href="https://script.google.com/macros/s/AKfycbwVROBK0rTo-z3puoRnrx2uqppMmqUHMFgch9i3x9VZi58ZziWfRA3j_WPhLdPflUks/exec" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>FEMA – Outward Remittance Advisory</h3>
+            <p>Transaction advisory under FEMA.</p>
+            <a href="https://script.google.com/macros/s/AKfycbxGRduRpuM-6DIs_zBPHairu_aaOU-uc7ixQ1vwd0S7dA0BFKInlmwKWFBbNOgFiMbKlA/exec" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>Interest Calculator</h3>
+            <p>Interest Calculator under IT Act.</p>
+            <a href="https://aisumitb.github.io/Income-Tax-Interest-Calculator/" class="btn">Open Tool</a>
+        </div>
+
+        <div class="card">
+            <h3>Audit Schedule Generator</h3>
+            <p>Generate structured audit schedules efficiently.</p>
+            <a href="https://aisumitb.github.io/Audit-Schedule-Generator-Hub/" class="btn">Open Tool</a>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    <div class="blog-login-row">
+       <div class="blog-slider">
+    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSzAOb0Rmv1iRzNllZIOP2_Kf-VRtlO_edZButCoxpmayAl2uC1Et5BUXZ1rs-3w4ZuqCPNt4tcPDdK/pubembed?start=true&loop=true&delayms=30000" frameborder="0" allowfullscreen="true"></iframe>
+</div>
+      <!-- CLIENT LOGIN -->
+    <div class="client-login">
+        <h3>Client Login</h3>
+
+        <input type="text" placeholder="User ID">
+        <input type="password" placeholder="Password">
+
+        <button>Login</button>
+
+        <div class="login-links">
+            <a href="https://script.google.com/macros/s/AKfycbwTe0yfIAQBIfvPpqynW6TZ3WdDKnbjzZHH6hO95MPwPjnQELn5lFi6oanaE8x3HZhj/exec">Forgot Password?</a>
+        </div>
     </div>
 
-    <form id="frm">
-      <div class="card grid">
-        <div>
-          <label>Total tax payable (₹)</label>
-          <input id="taxPayable" type="number" step="0.01" value="0">
-        </div>
-        <div>
-          <label>TDS / TCS / Other credits (₹)</label>
-          <input id="tds" type="number" step="0.01" value="0">
-        </div>
-        <div>
-          <label>Reliefs / MAT / AMT credit (₹)</label>
-          <input id="relief" type="number" step="0.01" value="0">
-        </div>
-      </div>
+</div>
+    <div class="video-section">
+<div class="video-row">
 
-      <div class="card grid">
-        <div>
-          <label>Self-assessment tax paid on or before due date (₹)</label>
-          <input id="selfTax" type="number" step="0.01" value="0">
-        </div>
-        <div>
-          <label>Total income (for 234F slab) (₹)</label>
-          <input id="totalIncome" type="number" step="0.01" value="0">
-        </div>
-        <div>
-          <label>Assessment Year (AY)</label>
-          <select id="ay">
-            <option value="2024-25">2024-25</option>
-            <option value="2025-26">2025-26</option>
-            <option value="2026-27">2026-27</option>
-          </select>
-        </div>
-      </div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bGu9s3bRot0?si=gpvnjrNHw4PzoCN1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-      <div class="card grid-2">
-        <div>
-          <label>Due date of return (under section 139(1))</label>
-          <input id="dueReturn" type="date">
-        </div>
-        <div>
-          <label>Actual date of filing return</label>
-          <input id="fileReturn" type="date">
-        </div>
-      </div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qA1eBjQr1sY?si=4jpsaVOTWo8CinrQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-      <div class="card">
-        <h3>Advance tax / Other payments (add multiple rows)</h3>
-        <div class="muted small">Enter each payment's date and amount. The calculator uses cumulative amounts up to relevant due dates.</div>
-        <div style="margin:10px 0; font-weight:bold;">Advance tax / Other payments (add multiple rows)<br>Enter each payment's date and amount. The calculator uses cumulative amounts up to relevant due dates.</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tl8NwLX9OW8?si=VqXM6gFX9--zLlrZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lLkzpndj-D4?si=PXjEkAuPY3Uek8LB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 
-<table id="paymentsTable" style="width:100%; border-collapse:collapse; margin-top:10px;">
-  <thead>
-    <tr>
-      <th style="border:1px solid #ccc; padding:6px;">Date</th>
-      <th style="border:1px solid #ccc; padding:6px;">Amount (₹)</th>
-      <th style="border:1px solid #ccc; padding:6px;">Action</th>
-    </tr>
-  </thead>
-  <tbody id="paymentsBody">
-    <tr><td colspan="3" class="muted" style="text-align:center; padding:6px;">No payments entered</td></tr>
-  </tbody>
-</table>
-        <div style="margin-top:8px" class="actions">
-          <button type="button" id="addPayment">Add payment</button>
-          <button type="button" id="clearPayments" class="secondary">Clear payments</button>
-        </div>
-      </div>
+</div>
+</div>
 
-      <div class="card actions">
-        <button type="button" id="compute">Compute interest (234A/234B/234C/234F)</button>
-        <button type="button" id="download" class="secondary">Download report (CSV)</button>
-        <button type="button" id="reset" class="danger">Reset all</button>
-      </div>
-    </form>
 
-    <div id="output" class="card out" aria-live="polite"></div>
-  </div>
+    
 
-  <script>
-    // Utilities
-    const $ = (id)=>document.getElementById(id);
-    function toNum(v){ const n = Number(v); return isNaN(n)?0:n; }
-    function fmt(x){ return '₹ ' + Number(x).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+<script>
 
-    // Round to nearest 100 as Excel ROUND(x,-2)
-    function roundNearest100(x){ return Math.round(x/100)*100; }
+fetch("https://script.google.com/macros/s/AKfycbxyVUzOwyd2biyCushl6oRfwcFHoz1i8wD8p-aSBlBTHMRehGubs0_zvy1CGKxiwK2QOA/exec?type=hit&page=Productcontrol-center")
+.then(res => res.json())
+.then(data => {
+  document.getElementById("counter").innerText = data.visitors;
+});
 
-    function dateISO(d){ if(!d) return null; const dt = new Date(d); if (isNaN(dt)) return null; return dt.toISOString().slice(0,10); }
+</script>
+    <script>
+function submitForm(){
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        message: document.getElementById("message").value
+    };
 
-    // days between a and b -> ceil diff/ (24h) as used earlier
-    function daysBetween(a,b){ const A=new Date(a); const B=new Date(b); if (isNaN(A)||isNaN(B)) return NaN; const diff=B.getTime()-A.getTime(); return Math.ceil(diff/(1000*60*60*24)); }
-    // months or part thereof between a (exclusive) and b (inclusive) -> ceil(days/30)
-    function monthsPart(a,b){ const days = daysBetween(a,b); if (isNaN(days) || days<=0) return 0; return Math.ceil(days/30); }
+    fetch("https://script.google.com/macros/s/AKfycbxayFJy4mQAYnRccScqCCa71i8zW_CX1Hh-3z9aLYoPTmnOIDwZGryhclpLApFt9bL9Zg/exec", {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(response => {
+        alert("Message sent successfully!");
+    })
+    .catch(err => {
+        alert("Error sending message");
+    });
+}
+</script>
+    <script>
+fetch("https://script.google.com/macros/s/AKfycbz3Mk_wiNKVrkrNsoAj2ItrM3kWpwReJ7WGd6MRqkeFynFOtWUYldsPM23GE6vUlV-x/exec")
+.then(res => res.json())
+.then(data => {
 
-    // Payments logic
-    const payments = [];
-    const paymentsBody = $('paymentsBody');
+    let newsText = "Latest Updates: ";
 
-    function renderPayments(){ paymentsBody.innerHTML=''; payments.forEach((p,idx)=>{
-      const tr=document.createElement('tr');
-      const tdDate=document.createElement('td'); tdDate.textContent = p.date || '';
-      const tdAmt=document.createElement('td'); tdAmt.textContent = p.amount ? Number(p.amount).toFixed(2) : '';
-      const tdAct=document.createElement('td');
-      const btnDel=document.createElement('button'); btnDel.textContent='Remove'; btnDel.style.background='#ef4444'; btnDel.style.color='white'; btnDel.style.border='0'; btnDel.style.padding='6px 8px'; btnDel.style.borderRadius='6px'; btnDel.onclick=()=>{ payments.splice(idx,1); renderPayments(); };
-      tdAct.appendChild(btnDel);
-      tr.appendChild(tdDate); tr.appendChild(tdAmt); tr.appendChild(tdAct);
-      paymentsBody.appendChild(tr);
-    }); if(payments.length===0){ const tr=document.createElement('tr'); const td=document.createElement('td'); td.colSpan=3; td.className='muted'; td.textContent='No payments entered'; tr.appendChild(td); paymentsBody.appendChild(tr);} }
-
-    $('addPayment').onclick = () => {
-
-  const dateStr = prompt('Enter payment date (DD-MM-YYYY)');
-
-  if(!dateStr) return;
-
-  const parts = dateStr.split('-');
-
-  if(parts.length !== 3){
-    alert('Enter date in DD-MM-YYYY format');
-    return;
-  }
-
-  const day = parts[0];
-  const month = parts[1];
-  const year = parts[2];
-
-  const isoDate = `${year}-${month}-${day}`;
-
-  const amtStr = prompt('Amount (₹)');
-  if(!amtStr) return;
-
-  const amt = toNum(amtStr);
-
-  if(amt <= 0){
-    alert('Enter valid amount');
-    return;
-  }
-
-  payments.push({date: isoDate, amount: amt});
-
-  payments.sort((a,b)=> new Date(a.date) - new Date(b.date));
-
-  renderPayments();
-};
-
-    $('clearPayments').addEventListener('click', ()=>{ if(confirm('Clear all payments?')){ payments.length=0; renderPayments(); } });
-
-    $('reset').addEventListener('click', ()=>{
-      if(!confirm('Reset all inputs?')) return;
-      document.getElementById('frm').reset(); payments.length=0; renderPayments(); $('output').innerHTML='';
+    data.forEach(item => {
+        newsText += item + " | ";
     });
 
-    // compute cumulative payments up to a date (inclusive)
-    function paidTill(date){
+    document.getElementById("newsTrack").innerText = newsText;
 
-  if(!date) return 0;
+})
+.catch(err => {
+    document.getElementById("newsTrack").innerText = "Unable to load updates";
+});
+</script>
 
-  const dueTime = new Date(date + "T23:59:59").getTime();
+     <footer class="footer-note">
 
-  let sum = 0;
+<div class="footer-container">
 
-  payments.forEach(p => {
+<div>
+All content and outputs on this platform are indicative in nature. Before taking any final decision or action, users must consult with us. We disclaim any liability for actions taken without such consultation.
+</div>
 
-    const payTime = new Date(p.date + "T00:00:00").getTime();
+<div class="visitor-counter">
+👁 Visitors: <span id="counter">000000</span>
+</div>
 
-    if(payTime <= dueTime){
-      sum += Number(p.amount);
-    }
+</div>
 
-  });
-
-  return sum;
-}
- 
-    // find date when cumulative payments become >= target; returns date string or null
-    function dateWhenCumulativeAtLeast(target){ let cum=0; for(const p of payments){ cum += Number(p.amount); if (cum >= target) return p.date; } return null; }
-
-    // Main compute
-    $('compute').addEventListener('click', ()=>{
-      const taxPayable = toNum($('taxPayable').value);
-      const tds = toNum($('tds').value);
-      const relief = toNum($('relief').value);
-      const selfTax = toNum($('selfTax').value);
-      const totalIncome = toNum($('totalIncome').value);
-      const dueReturn = dateISO($('dueReturn').value);
-      const fileReturn = dateISO($('fileReturn').value);
-      const ay = $('ay').value;
-
-      if(!dueReturn || !fileReturn){ alert('Please enter due date and filing date'); return; }
-
-      // Assessed tax = tax payable - TDS - relief
-      let assessedTax = taxPayable - tds - relief; if (assessedTax < 0) assessedTax = 0;
-
-      // Total advance payments irrespective of date
-      const totalAdvance = payments.reduce((s,p)=>s+Number(p.amount),0);
-
-      // PAYMENTS considered up to filing date
-      const paidUpToFiling = paidTill(fileReturn);
-
-      // 234A: shortfall = assessedTax - (selfTax + paidUpToFiling)
-      let short234A = assessedTax - (selfTax + paidUpToFiling); if (short234A < 0) short234A = 0;
-      // months from day after due date to filing date
-      const dueNext = new Date(dueReturn); dueNext.setDate(dueNext.getDate()+1);
-      const months234A = monthsPart(dueNext.toISOString().slice(0,10), fileReturn);
-      const int234A = short234A * 0.01 * months234A;
-
-      // 234B: base = round(max(assessedTax - totalAdvance,0), -2)
-      let base234B = Math.max(assessedTax - totalAdvance, 0);
-      const base234B_rounded = roundNearest100(base234B);
-      // months from Apr 1 of AY to filing date
-      let ayStartYear = parseInt(ay.split('-')[0],10);
-      const ayStart = new Date(ayStartYear,3,1); // April 1
-      const months234B = monthsPart(ayStart.toISOString().slice(0,10), fileReturn);
-      const int234B = base234B_rounded * 0.01 * months234B;
-
-      // 234C: instalment required percentages applied on assessedTax
-      const req1 = assessedTax * 0.15;
-      const req2 = assessedTax * 0.45;
-      const req3 = assessedTax * 0.75;
-      const req4 = assessedTax * 1.00;
-
-      // Determine due dates based on AY selected
-     const ayStartYearNum = parseInt(ay.split('-')[0],10);
-
-// advance tax belongs to previous financial year
-const fyYear = ayStartYearNum - 1;
-
-const due1 = fyYear + '-06-15';
-const due2 = fyYear + '-09-15';
-const due3 = fyYear + '-12-15';
-const due4 = ayStartYearNum + '-03-15';
-      // For each instalment compute cumulative paid till that due date
-      const paid1 = paidTill(due1);
-      const paid2 = paidTill(due2);
-      const paid3 = paidTill(due3);
-      const paid4 = paidTill(due4);
-
-      const short1 = Math.max(0, req1 - paid1);
-      const short2 = Math.max(0, req2 - paid2);
-      const short3 = Math.max(0, req3 - paid3);
-      const short4 = Math.max(0, req4 - paid4);
-
-      // For each shortfall, find the date when the required cumulative amount was reached (if at all)
-      const payDate1 = short1>0 ? (dateWhenCumulativeAtLeast(req1) || fileReturn) : null;
-      const payDate2 = short2>0 ? (dateWhenCumulativeAtLeast(req2) || fileReturn) : null;
-      const payDate3 = short3>0 ? (dateWhenCumulativeAtLeast(req3) || fileReturn) : null;
-      const payDate4 = short4>0 ? (dateWhenCumulativeAtLeast(req4) || fileReturn) : null;
-
-      // months: from day after due date to date when shortfall was made good (or filing date)
-      const due1Next = new Date(due1); due1Next.setDate(due1Next.getDate()+1);
-      const due2Next = new Date(due2); due2Next.setDate(due2Next.getDate()+1);
-      const due3Next = new Date(due3); due3Next.setDate(due3Next.getDate()+1);
-      const due4Next = new Date(due4); due4Next.setDate(due4Next.getDate()+1);
-
-      const months1 = short1>0 ? 3 : 0;
-      const months2 = short2>0 ? 3 : 0;
-      const months3 = short3>0 ? 3 : 0;
-      const months4 = short4>0 ? 1 : 0;
-
-      const int1 = short1 * 0.01 * months1;
-      const int2 = short2 * 0.01 * months2;
-      const int3 = short3 * 0.01 * months3;
-      const int4 = short4 * 0.01 * months4;
-      const int234C = int1 + int2 + int3 + int4;
-
-
-
+</footer>
+   
      
 
-      // 234F late fee: if filed after due date
-      let fee234F = 0;
+        
 
-if (new Date(fileReturn) > new Date(dueReturn)) {
+   
 
-  if (totalIncome <= 500000) {
-    fee234F = 1000;
-  } else {
-    fee234F = 5000;
-  }
+    
 
-}
-
-      const totalInterest = int234A + int234B + int234C;
-
-      // Build output
-      const out = [];
-      out.push('<h2>Computation Summary</h2>');
-      out.push('<table>');
-      out.push(`<tr><th>Assessed tax (tax - tds - relief)</th><td>${fmt(assessedTax)}</td></tr>`);
-      out.push(`<tr><th>Total payments (all dates)</th><td>${fmt(totalAdvance)}</td></tr>`);
-      out.push(`<tr><th>Payments up to filing date (${fileReturn})</th><td>${fmt(paidUpToFiling)}</td></tr>`);
-      out.push('</table>');
-
-      out.push('<h3>Section 234A — Delay in filing</h3>');
-      out.push('<table>');
-      out.push(`<tr><th>Shortfall for 234A</th><td>${fmt(short234A)}</td></tr>`);
-      out.push(`<tr><th>Months (or part) from day after due date to filing</th><td>${months234A}</td></tr>`);
-      out.push(`<tr><th>Interest @1%/month</th><td>${fmt(int234A)}</td></tr>`);
-      out.push('</table>');
-
-      out.push('<h3>Section 234B — Default in payment of advance tax</h3>');
-      out.push('<table>');
-      out.push(`<tr><th>Base (assessed tax - total advance)</th><td>${fmt(base234B)}</td></tr>`);
-      out.push(`<tr><th>Base rounded to nearest ₹100</th><td>${fmt(base234B_rounded)}</td></tr>`);
-      out.push(`<tr><th>Months from Apr 1 of AY (${ayStart.toISOString().slice(0,10)}) to filing</th><td>${months234B}</td></tr>`);
-      out.push(`<tr><th>Interest @1%/month</th><td>${fmt(int234B)}</td></tr>`);
-      out.push('</table>');
-
-      out.push('<h3>Section 234C — Deferment of advance tax (quarterly)</h3>');
-      out.push('<table>');
-      out.push(`<tr><th>Instalment</th><th>Required</th><th>Paid till due</th><th>Shortfall</th><th>Date shortfall cleared</th><th>Months</th><th>Interest</th></tr>`);
-      out.push(`<tr><td>1 (15 Jun)</td><td>${fmt(req1)}</td><td>${fmt(paid1)}</td><td>${fmt(short1)}</td><td>${payDate1 || 'Not reached'}</td><td>${months1}</td><td>${fmt(int1)}</td></tr>`);
-      out.push(`<tr><td>2 (15 Sep)</td><td>${fmt(req2)}</td><td>${fmt(paid2)}</td><td>${fmt(short2)}</td><td>${payDate2 || 'Not reached'}</td><td>${months2}</td><td>${fmt(int2)}</td></tr>`);
-      out.push(`<tr><td>3 (15 Dec)</td><td>${fmt(req3)}</td><td>${fmt(paid3)}</td><td>${fmt(short3)}</td><td>${payDate3 || 'Not reached'}</td><td>${months3}</td><td>${fmt(int3)}</td></tr>`);
-      out.push(`<tr><td>4 (15 Mar)</td><td>${fmt(req4)}</td><td>${fmt(paid4)}</td><td>${fmt(short4)}</td><td>${payDate4 || 'Not reached'}</td><td>${months4}</td><td>${fmt(int4)}</td></tr>`);
-      out.push(`<tr><th colspan="6">Total 234C interest</th><th>${fmt(int234C)}</th></tr>`);
-      out.push('</table>');
-
-      out.push('<h3>Section 234F — Late filing fee</h3>');
-      out.push('<table>');
-      out.push(`<tr><th>Filing after due date?</th><td>${new Date(fileReturn) > new Date(dueReturn) ? 'Yes' : 'No'}</td></tr>`);
-      out.push(`<tr><th>Late fee (234F)</th><td>${fmt(fee234F)}</td></tr>`);
-      out.push('</table>');
-
-      out.push('<h3>Grand totals</h3>');
-      out.push('<table>');
-      out.push(`<tr><th>Total interest (234A + 234B + 234C)</th><td>${fmt(totalInterest)}</td></tr>`);
-      out.push(`<tr><th>Late fee (234F)</th><td>${fmt(fee234F)}</td></tr>`);
-      out.push(`<tr><th>Payable (interest + fee)</th><td>${fmt(totalInterest + fee234F)}</td></tr>`);
-      out.push('</table>');
-
-      $('output').innerHTML = out.join('\n');
-    });
-
-    // CSV download of payments and summary
-    $('download').addEventListener('click', ()=>{
-      if(payments.length===0){ alert('No payments to download'); return; }
-      let csv = 'date,amount\n'; payments.forEach(p=> csv += `${p.date},${Number(p.amount).toFixed(2)}\n`);
-      const blob = new Blob([csv], {type:'text/csv'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'payments.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-
-    // initial render
-    renderPayments();
-  </script>
-
-  <script>
-    // --- Example structure for backend call ---
-    function sendReport(type) {
-      fetch('/send-report', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ format: type, data: collectReportData() })
-      })
-      .then(r => r.json())
-      .then(res => alert(res.message));
-    }
-
-    // --- Example harvest function (can be expanded) ---
-    function collectReportData() {
-      return {
-        taxableIncome: document.getElementById('taxableIncome')?.value || '',
-        payments: getPaymentRows?.() || [],
-        results: document.getElementById('resultSection')?.innerText || ''
-      };
-    }
-  </script>
 </body>
 </html>
-
-      
