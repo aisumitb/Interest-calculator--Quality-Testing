@@ -359,13 +359,14 @@ font-size:12px;
 .promo-slide.active{
     opacity:1;
 }
-        .blog-section-row{
-    display:flex;
-    gap:20px;
-    align-items:flex-start;
-}
 .blog-slider{
-    flex:3;
+    margin-left:20px;
+    margin-right:40px;
+    margin-top:0; 
+    width:960px;
+    aspect-ratio:16/9;
+    overflow:hidden;   /* VERY IMPORTANT */
+    background:#ffffff;
 }
 
 .blog-slider iframe{
@@ -618,16 +619,9 @@ font-size:12px;
     </div>
     </div>
     </div>
-    <div class="blog-section-row">
     <div class="blog-slider">
     <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSzAOb0Rmv1iRzNllZIOP2_Kf-VRtlO_edZButCoxpmayAl2uC1Et5BUXZ1rs-3w4ZuqCPNt4tcPDdK/pubembed?start=true&loop=true&delayms=30000" frameborder="0" allowfullscreen="true"></iframe>
 </div>
-     <!-- LOGIN BUTTON -->
-    <div class="login-button-box">
-        <a href="https://script.google.com/macros/s/AKfycbwPknsQzBWd-Xgor7eJpVronAkF4CFXnn3u6BQ9IooVjwf1Ke6syLIuA6rLZnoONsVO/exec" class="login-btn">Client Login</a>
-    </div>
-    </div>
-    
     <div class="video-section">
 <div class="video-row">
 
@@ -642,7 +636,6 @@ font-size:12px;
 
 
 </div>
-       
 </div>
 
 
@@ -650,7 +643,7 @@ font-size:12px;
 
 <script>
 
-fetch("https://script.google.com/macros/s/AKfycbxyVUzOwyd2biyCushl6oRfwcFHoz1i8wD8p-aSBlBTHMRehGubs0_zvy1CGKxiwK2QOA/exec?type=hit&page=Productcontrol-center")
+fetch("https://script.google.com/macros/s/AKfycbxyVUzOwyd2biyCushl6oRfwcFHoz1i8wD8p-aSBlBTHMRehGubs0_zvy1CGKxiwK2QOA/exec?type=hit&page=Productcontrol-testcenter")
 .then(res => res.json())
 .then(data => {
   document.getElementById("counter").innerText = data.visitors;
