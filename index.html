@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -360,15 +359,13 @@ font-size:12px;
 .promo-slide.active{
     opacity:1;
 }
+        .blog-section-row{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
 .blog-slider{
-    margin-left:20px;
-    margin-right:40px;
-    margin-top:0; 
-    width:960px;
-    aspect-ratio:16/9;
-    overflow:hidden;   /* VERY IMPORTANT */
-    background:#ffffff;
-  
+    flex:3;
 }
 
 .blog-slider iframe{
@@ -377,59 +374,6 @@ font-size:12px;
     transform: translate(-10%, -10%);
     border:none;
     pointer-events:none;
-}
-      .blog-login-row{
-    display:flex;
-    gap:20px;
-    margin-top:20px;
-}
-      .client-login{
-    flex:1;
-    background:#ffffff;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-}
-
-.client-login h3{
-    background:#1e3a8a;
-    color:#fff;
-    padding:10px;
-    margin:-15px -15px 10px -15px;
-    font-size:16px;
-}
-
-.client-login input{
-    width:100%;
-    padding:8px;
-    margin-bottom:10px;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
-
-.client-login button{
-    width:100%;
-    padding:8px;
-    background:#1e3a8a;
-    color:#fff;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-.client-login button:hover{
-    background:#162d6b;
-}
-
-.login-links{
-    margin-top:8px;
-    text-align:right;
-}
-
-.login-links a{
-    font-size:12px;
-    color:#1e3a8a;
-    text-decoration:none;
 }
         .contact-form{
     background:#ffffff;
@@ -674,25 +618,16 @@ font-size:12px;
     </div>
     </div>
     </div>
-    <div class="blog-login-row">
-       <div class="blog-slider">
+    <div class="blog-section-row">
+    <div class="blog-slider">
     <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSzAOb0Rmv1iRzNllZIOP2_Kf-VRtlO_edZButCoxpmayAl2uC1Et5BUXZ1rs-3w4ZuqCPNt4tcPDdK/pubembed?start=true&loop=true&delayms=30000" frameborder="0" allowfullscreen="true"></iframe>
 </div>
-      <!-- CLIENT LOGIN -->
-    <div class="client-login">
-        <h3>Client Login</h3>
-
-        <input type="text" placeholder="User ID">
-        <input type="password" placeholder="Password">
-
-        <button>Login</button>
-
-        <div class="login-links">
-            <a href="https://script.google.com/macros/s/AKfycbwPknsQzBWd-Xgor7eJpVronAkF4CFXnn3u6BQ9IooVjwf1Ke6syLIuA6rLZnoONsVO/exec">Forgot Password?</a>
-        </div>
+     <!-- LOGIN BUTTON -->
+    <div class="login-button-box">
+        <a href="https://script.google.com/macros/s/AKfycbwPknsQzBWd-Xgor7eJpVronAkF4CFXnn3u6BQ9IooVjwf1Ke6syLIuA6rLZnoONsVO/exec" class="login-btn">Client Login</a>
     </div>
-
-</div>
+    </div>
+    
     <div class="video-section">
 <div class="video-row">
 
@@ -707,6 +642,7 @@ font-size:12px;
 
 
 </div>
+       
 </div>
 
 
